@@ -30,8 +30,8 @@ plugins {
  * JUnit5 library is removed.
  * This may be an Eclipse only issue.
  */
-sourceCompatibility = 1.7 
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
