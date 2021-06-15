@@ -1,6 +1,8 @@
 package tests;
 
 import labs.*;
+
+import java.io.InputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.*;
 
@@ -8,14 +10,19 @@ import org.junit.jupiter.api.*;
 class Lab01_Tests {
 	
 	public String outputStream;
-	
+	private static final PrintStream systemOut = System.out;
+
 	
 	@Test
 	@DisplayName("Test Problem #1")
 	void test1() {
 		outputStream = "";
 		
+		overridePrintStatements();
+		
 		Lab01.problem1();
+		
+		System.setOut(systemOut);
 		
 		try {
 			Assertions.assertEquals("Hello World", outputStream);
@@ -47,17 +54,23 @@ class Lab01_Tests {
 		
 		outputStream = "";
 		
+		overridePrintStatements();
+		
 		String testOutput = "";
-		testOutput += "\\\\   //\n";
-		testOutput += " \\\\ //\n";
-		testOutput += "  \\\\/\n";
-		testOutput += "  //\\\n";
-		testOutput += " // \\\\\n";
-		testOutput += "//   \\\\\n";
+		testOutput += "\\\\   //";
+		testOutput += " \\\\ //";
+		testOutput += "  \\\\/";
+		testOutput += "  //\\";
+		testOutput += " // \\\\";
+		testOutput += "//   \\\\";
 		
 		
 		
 		Lab01.problem3();
+		
+		System.setOut(systemOut);
+		
+		
 		
 		try {
 			Assertions.assertEquals(testOutput, outputStream);
@@ -65,6 +78,7 @@ class Lab01_Tests {
 		catch (AssertionError e) {
 			System.out.println("Error:\n"
 					 + "Output not formatted correctly.");
+			System.out.println("Output Stream = \n" + outputStream);
 			Assertions.fail();
 		}
 	}
@@ -76,15 +90,20 @@ class Lab01_Tests {
 		
 		outputStream = "";
 		
+		overridePrintStatements();
+		
 		try {
 			Lab01.problem4();
 		}
 		catch (Exception e) {
+			System.setOut(systemOut);
 			System.out.println("Error:\n"
 					 + "Either problem 4 not started yet,"
 					 + "or method not named correctly");
 			Assertions.fail();
 		}
+		
+		System.setOut(systemOut);
 		
 		try {
 			Assertions.assertEquals("Comp Sci still looks like \"Magic\"", outputStream);
@@ -125,5 +144,10 @@ class Lab01_Tests {
 		outputStream += str;
 	}
 	
+	
+	@AfterAll
+	static void afterAll() {
+		System.setOut(systemOut);
+	}
 	
 }
