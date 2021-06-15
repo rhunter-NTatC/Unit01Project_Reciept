@@ -1,36 +1,42 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.*;
 import labs.*;
-
-import java.io.InputStream;
-import java.io.PrintStream;
 import org.junit.jupiter.api.*;
 
 
 class Lab01_Tests {
 	
-	public String outputStream;
-	private static final PrintStream systemOut = System.out;
+	public static InOutMimic inOut;
 
+	
+	@BeforeAll
+	static void beforeAll() {
+		inOut = new InOutMimic();
+	}
 	
 	@Test
 	@DisplayName("Test Problem #1")
 	void test1() {
-		outputStream = "";
 		
-		overridePrintStatements();
 		
+		inOut.resetOutputStream();
+		inOut.overridePrintStatements();
 		Lab01.problem1();
-		
-		System.setOut(systemOut);
+		inOut.resetSystem();
 		
 		try {
-			Assertions.assertEquals("Hello World", outputStream);
+			assertEquals("Hello World", inOut.getOutputStream());
 		}
 		catch (AssertionError e) {
-			System.out.println("Error:\n"
-					 + "Output not formatted correctly.");
-			Assertions.fail();
+			try {
+				assertEquals("Hello World\n", inOut.getOutputStream());
+			}
+			catch (AssertionError g) {
+				System.out.println("Error: "
+						 + "Output not formatted correctly.");
+				fail();
+			}
 		}
 		
 	}
@@ -40,7 +46,7 @@ class Lab01_Tests {
 	@DisplayName("Test Problem #2")
 	void test2() {
 		
-		outputStream = "";
+		
 		
 		System.out.println("No Test for Problem #2:");
 		
@@ -52,34 +58,34 @@ class Lab01_Tests {
 	@DisplayName("Test Problem #3")
 	void test3() {
 		
-		outputStream = "";
+		inOut.resetOutputStream();
+		inOut.overridePrintStatements();
+		Lab01.problem3();
+		inOut.resetSystem();
 		
-		overridePrintStatements();
+		
 		
 		String testOutput = "";
-		testOutput += "\\\\   //";
-		testOutput += " \\\\ //";
-		testOutput += "  \\\\/";
-		testOutput += "  //\\";
-		testOutput += " // \\\\";
+		testOutput += "\\\\   //\n";
+		testOutput += " \\\\ //\n";
+		testOutput += "  \\\\/\n";
+		testOutput += "  //\\\n";
+		testOutput += " // \\\\\n";
 		testOutput += "//   \\\\";
 		
-		
-		
-		Lab01.problem3();
-		
-		System.setOut(systemOut);
-		
-		
-		
 		try {
-			Assertions.assertEquals(testOutput, outputStream);
+			assertEquals(testOutput, inOut.getOutputStream());
 		}
 		catch (AssertionError e) {
-			System.out.println("Error:\n"
-					 + "Output not formatted correctly.");
-			System.out.println("Output Stream = \n" + outputStream);
-			Assertions.fail();
+			try {
+				assertEquals(testOutput + "\n", inOut.getOutputStream());
+			}
+			catch (AssertionError f) {
+				System.out.println("Error: "
+						 + "Output not formatted correctly.");
+				System.out.println("Output Stream = \n" + inOut.getOutputStream());
+				fail();
+			}
 		}
 	}
 	
@@ -88,66 +94,45 @@ class Lab01_Tests {
 	@DisplayName("Test Problem #4")
 	void test4() {
 		
-		outputStream = "";
+		inOut.resetOutputStream();
+		inOut.overridePrintStatements();
 		
-		overridePrintStatements();
 		
 		try {
 			Lab01.problem4();
 		}
 		catch (Exception e) {
-			System.setOut(systemOut);
-			System.out.println("Error:\n"
+			inOut.resetSystem();
+			System.out.println("Error: "
 					 + "Either problem 4 not started yet,"
-					 + "or method not named correctly");
-			Assertions.fail();
+					 + " or method not named correctly");
+			fail();
 		}
 		
-		System.setOut(systemOut);
+		inOut.resetSystem();
 		
 		try {
-			Assertions.assertEquals("Comp Sci still looks like \"Magic\"", outputStream);
+			assertEquals("Comp Sci still looks like \"Magic\"", inOut.getOutputStream());
 		}
 		catch (AssertionError e) {
-			System.out.println("Error:\n"
-					 + "Output not formatted correctly.");
-			Assertions.fail();
+			try {
+				assertEquals("Comp Sci still looks like \"Magic\"\n", inOut.getOutputStream());
+			}
+			catch (AssertionError f) {
+				System.out.println("Error: "
+						 + "Output not formatted correctly.");
+				System.out.println("Output Stream = \n" + inOut.getOutputStream());
+				fail();
+			}
 		}
 		
 	}
 	
-	
-	/*
-	 * Diverts all calls to println(), print() or printf() to printCalled()
-	 */
-	void overridePrintStatements() {
-		System.setOut(new PrintStream(System.out) {
-			
-			public void print(String str) {
-				printCalled(str);
-			}
-			
-			
-			public void println(String str) {
-				printCalled(str);
-			}
-			
-		});
-		
-	}
-	
-	
-	/*
-	 * Handles all print calls
-	 */
-	void printCalled(String str) {
-		outputStream += str;
-	}
 	
 	
 	@AfterAll
 	static void afterAll() {
-		System.setOut(systemOut);
+		inOut.resetSystem();
 	}
 	
 }
