@@ -61,6 +61,12 @@ public class InOutMimic {
 				printCalled(str + "\n");
 			}
 			
+			
+			@SuppressWarnings("unused")
+			public void printf(String str) {
+				printCalled(str);
+			}
+			
 		});
 		
 	}

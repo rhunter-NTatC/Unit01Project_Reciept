@@ -24,37 +24,31 @@ public class Lab01 {
 	
 	//Problem #1
 	public static void problem1() {
-		System.out.println("Hello World");
+		
+
 	}
 	
 	
 	//Problem #2
 	public static void problem2() {
-		System.out.println("****");
-		System.out.println("*   *");
-		System.out.println("*   *");
-		System.out.println("****");
-		System.out.println("**");
-		System.out.println("* *");
-		System.out.println("*  *");
-		System.out.println("*   *");
+		
+
+		
 	}
 
 
 	//Problem #3
 	public static void problem3() {
-		System.out.println("\\\\   //");
-		System.out.println(" \\\\ //");
-		System.out.println("  \\\\/");
-		System.out.println("  //\\");
-		System.out.println(" // \\\\");
-		System.out.println("//   \\\\");
+		
+
+		
 	}
 	
 	
 	//Problem #4
 	public static void problem4() {
-		System.out.println("Comp Sci still looks like \"Magic\"");
+		
+
 	}
 	
 	

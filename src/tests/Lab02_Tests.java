@@ -42,6 +42,7 @@ class Lab02_Tests {
 			catch (AssertionError f) {
 				System.out.println("Error: "
 						 + "Output not formatted correctly.");
+				System.out.println("Output Stream = \n" + inOut.getOutputStream());
 				fail();
 			}
 		}
