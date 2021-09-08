@@ -32,7 +32,6 @@ public class Lab01 {
 	//Problem #2
 	public static void problem2() {
 		
-
 		
 	}
 
@@ -46,10 +45,7 @@ public class Lab01 {
 	
 	
 	//Problem #4
-	public static void problem4() {
-		
-
-	}
+	
 	
 	
 	
