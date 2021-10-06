@@ -10,7 +10,7 @@ class Lab02_Tests {
 
 
 	public static InOutMimic inOut;
-
+	//asdfg
 	
 	@BeforeAll
 	static void beforeAll() {

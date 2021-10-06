@@ -43,7 +43,9 @@ public class Lab02 {
 
 	//Problem #3
 	public static void problem3() {
-		
+//		Scanner inKey = new Scanner(System.in); //See SCANNER OBJECTS below for explanation
+//		System.out.print();
+//		String input = inKey.nextLine();
 
 		
 	}
